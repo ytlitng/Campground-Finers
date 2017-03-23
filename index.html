@@ -1,0 +1,70 @@
+<html ng-app="app">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
+    <!-- endbower -->
+    <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+    <!-- inject:css -->
+    <!-- endinject -->
+</head>
+
+<body ng-controller="CampController as vm">
+    <div class="container-fluid">
+        <h1 style="color:black; text-align:center">Campground Finder</h1>
+        <h4 style="color:black; text-align:center">Need to know where to camp? We got you covered!</h4>
+
+        <hr/>
+
+
+        <div class="col-sm-6">
+            <input class="form-control" ng-model="vm.chosenPlace" googleplace placeholder="Enter Destination city">
+            <form ng-submit="vm.fetch(vm.chosenPlace)">
+        </div>
+        <div class="col-sm-6">
+            <div class="input-group" style="margin-bottom: 12px;">
+                <select ng-model="vm.selectedSite" ng-options="sites[0] for sites in vm.sites"></select>
+                <button class="btn btn-primary" type="submit">Go!</button>
+                </span>
+            </div>
+        </div>
+        </form>
+        <div class="col-sm-6"></div>
+        <div class="row" style="margin-top: 12px;">
+            <div class="col-sm-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Top Results</div>
+                    <div class="panel-body">
+
+                        <table class="table table-striped">
+                            <tr ng-repeat="result in vm.campGround.resultset.result | limitTo : 10">
+                                <td>
+                                    <h5>Facility Name:</h5> {{result._facilityName}}</td>
+                                <td><img src="{{result._facilityPhoto}}" /></td>
+
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false "></script>
+
+        <!-- bower:js -->
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+        <!-- endbower -->
+
+        <!-- inject:js -->
+        <script src="app/app.module.js"></script>
+        <script src="app/camp.controller.js"></script>
+        <script src="app/xml2json.js"></script>
+        <script src="app/core/googleplace.directive.js"></script>
+        <script src="app/home/home.controller.js"></script>
+        <!-- endinject -->
+</body>
+
+</html>
